@@ -42,7 +42,6 @@ EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
 ```
-
 </details>
 
 2. Create and start a container
@@ -64,7 +63,10 @@ We have to be able to connect to the container's SSHd service via 127.0.0.1:22 h
 ## Deployment
 
 ### 1. Setup use of 10.0.0.2/16 static IP address, Netmask 255.255.0.0, gateway 10.0.0.1/16
-Create ansible role `container-net-setup`. roles/container-net-setup/tasks/main.yml:
+Create ansible role `container-net-setup`.
+<details>
+  <summary>./roles/container-net-setup/tasks/main.yml:</summary>
+
 ```yaml
 ---
 - name: Create the network 10.0.0.0/16
@@ -93,6 +95,6 @@ Create ansible role `container-net-setup`. roles/container-net-setup/tasks/main.
     # Suppress DEPRECATION WARNING
     networks_cli_compatible: yes
 ```
-
+</details>
 
 
