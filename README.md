@@ -12,7 +12,7 @@ We need Linux Ubuntu server 18.04 LTS with running sshd service. The server play
 ### Setup *Ansible Host*
 
 Let's implement *Ansible Host* as a Docker container.
-1. Build an image.
+1. Build a Docker image.
 
 ` > docker build -t ubuntu-sshd:18.04 .`
 <details>
@@ -44,6 +44,7 @@ CMD ["/usr/sbin/sshd", "-D"]
 </details>
 
 2. Create and start a container
+Actually, this is an optional stage which can be implemented by ansible's task 
 
 ` > docker run -d -p 127.0.0.1:22:22 --name ubuntu_18.04 ubuntu-sshd:18.04`
 
