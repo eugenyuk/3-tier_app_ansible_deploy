@@ -1,0 +1,26 @@
+---
+- name: Create the network 10.0.0.0/16
+  docker_network:
+    name: network-10.0.0.0_16
+    ipam_config:
+      - subnet: 10.0.0.0/16
+        gateway: 10.0.0.1
+
+- name: Start the container 'ubuntu_18.04' if it's not up
+  docker_container:
+    # The container 'ubuntu_18.04' should be existed and started.
+    # If it doesn't exist then create it using ubuntu-sshd:18.04 image and start.
+    name: ubuntu_18.04
+    image: ubuntu-sshd:18.04
+    published_ports: 127.0.0.1:22:22
+    state: started
+
+- name: Assign the ip 10.0.0.2 and connect the container to the network
+  docker_container:
+    name: ubuntu_18.04
+    networks:
+      - name: network-10.0.0.0_16
+        ipv4_address: "10.0.0.2"
+    state: started
+    # Suppress DEPRECATION WARNING
+    networks_cli_compatible: yes
