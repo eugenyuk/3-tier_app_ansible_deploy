@@ -97,4 +97,6 @@ Create ansible role `container-net-setup`.
 ```
 </details>
 
+### 2. Install Nginx, configure it to serve static pages and dynamic pages via FCGI (python application)
+
 
