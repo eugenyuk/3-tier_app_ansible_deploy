@@ -97,6 +97,28 @@ Create ansible role `container-net-setup`.
 ```
 </details>
 
+```
+$ ansible-playbook playbook.yml 
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [localhost] *********************************************************************************************************************************************
+
+TASK [Gathering Facts] ***************************************************************************************************************************************
+ok: [localhost]
+
+TASK [container-net-setup : Create the network 10.0.0.0/16] **************************************************************************************************
+changed: [localhost]
+
+TASK [container-net-setup : Start the container 'ubuntu_18.04' if it's not up] *******************************************************************************
+changed: [localhost]
+
+TASK [container-net-setup : Assign the ip 10.0.0.2 and connect the container to the network] *****************************************************************
+changed: [localhost]
+
+PLAY RECAP ***************************************************************************************************************************************************
+localhost                  : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
 ### 2. Install Nginx, configure it to serve static pages and dynamic pages via FCGI (python application)
 
 
