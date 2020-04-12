@@ -11,6 +11,10 @@
     name: ubuntu_18.04
     networks:
       - name: network-10.0.0.0_16
-        ipv4_address: "10.0.0.3"
+        ipv4_address: "10.0.0.2"
+    # Container should be existed and started. If it doesn't exist
+    # then create it using ubuntu-sshd:18.04 image and start.
     image: ubuntu-sshd:18.04
     state: started
+    # Suppress DEPRECATION WARNING
+    networks_cli_compatible: yes
