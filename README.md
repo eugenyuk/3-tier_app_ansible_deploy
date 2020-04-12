@@ -44,7 +44,7 @@ CMD ["/usr/sbin/sshd", "-D"]
 </details>
 
 2. Create and start a container
-Actually, this is an optional stage which can be implemented by ansible's task 
+Actually, this is an optional stage which can be implemented by ansible's task **Start the container 'ubuntu_18.04' if it's not up**.
 
 ` > docker run -d -p 127.0.0.1:22:22 --name ubuntu_18.04 ubuntu-sshd:18.04`
 
