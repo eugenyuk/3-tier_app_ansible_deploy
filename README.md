@@ -13,7 +13,9 @@ We need Linux Ubuntu server 18.04 LTS with running sshd service. The server play
 
 Let's implement *Ansible Host* as a Docker container.
 1. Build an image. 
-<details><summary>There is a Dockerfile for this:</summary>
+<details>
+  <summary>There is a Dockerfile for this:</summary>
+
 ```dockerfile
 # Base image
 FROM ubuntu:18.04
@@ -36,6 +38,7 @@ EXPOSE 22
 
 CMD ["/usr/sbin/sshd", "-D"]
 ```
+
 </details>
 
 
