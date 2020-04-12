@@ -60,3 +60,39 @@ CONTAINER ID        IMAGE               COMMAND               CREATED           
 9381672c0d12        ubuntu-sshd:18.04   "/usr/sbin/sshd -D"   5 seconds ago       Up 4 seconds        127.0.0.1:22->22/tcp   ubuntu_18.04
 ```
 We have to be able to connect to the container's SSHd service via 127.0.0.1:22 host socket.
+
+## Deployment
+
+### 1. Setup use of 10.0.0.2/16 static IP address, Netmask 255.255.0.0, gateway 10.0.0.1/16
+Create ansible role `container-net-setup`. roles/container-net-setup/tasks/main.yml:
+```yaml
+---
+- name: Create the network 10.0.0.0/16
+  docker_network:
+    name: network-10.0.0.0_16
+    ipam_config:
+      - subnet: 10.0.0.0/16
+        gateway: 10.0.0.1
+
+- name: Start the container 'ubuntu_18.04' if it's not up
+  docker_container:
+    # The container 'ubuntu_18.04' should be existed and started.
+    # If it doesn't exist then create it using ubuntu-sshd:18.04 image and start.
+    name: ubuntu_18.04
+    image: ubuntu-sshd:18.04
+    published_ports: 127.0.0.1:22:22
+    state: started
+
+- name: Assign the ip 10.0.0.2 and connect the container to the network
+  docker_container:
+    name: ubuntu_18.04
+    networks:
+      - name: network-10.0.0.0_16
+        ipv4_address: "10.0.0.2"
+    state: started
+    # Suppress DEPRECATION WARNING
+    networks_cli_compatible: yes
+```
+
+
+
