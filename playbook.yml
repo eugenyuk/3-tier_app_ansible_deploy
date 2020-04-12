@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+  connection: local
+  roles:
+    - container-net-setup
+    - nginx
+    - flask
+    - postgres
