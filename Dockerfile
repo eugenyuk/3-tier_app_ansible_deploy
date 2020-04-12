@@ -3,6 +3,8 @@ FROM ubuntu:18.04
 
 # Install packets
 RUN apt-get update && apt-get install -y python openssh-server
+
+# To set up SSHd service in a container
 RUN mkdir /var/run/sshd
 RUN echo 'root:secret' | chpasswd
 RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
@@ -14,4 +16,5 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
+
 CMD ["/usr/sbin/sshd", "-D"]
