@@ -9,3 +9,6 @@
   remote_user: root
   roles:
     - ssh-key-auth
+
+      #- name: deploy nginx
+      #    hosts: webapp-nginx

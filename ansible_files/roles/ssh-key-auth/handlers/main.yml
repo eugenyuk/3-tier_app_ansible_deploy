@@ -1,2 +1,5 @@
 ---
-# handlers file for setup-passwordless-ssh-transport
+- name: reload ssh
+  service:
+    name: ssh
+    state: reloaded
