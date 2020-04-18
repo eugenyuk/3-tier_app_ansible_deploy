@@ -1,0 +1,22 @@
+---
+- name: Create the network 10.0.0.0/16
+  docker_network:
+    name: "{{ net_name }}"
+    ipam_config:
+      - subnet: 10.0.0.0/16
+        gateway: 10.0.0.1
+
+- name: Assign ip addresses and connect containers to the network
+  docker_container:
+    name: "{{ item.cont_name }}"
+    image: ubuntu-sshd:18.04
+    networks:
+      - name: "{{ net_name }}"
+        ipv4_address: "{{ item.ip_addr }}" 
+    state: started
+    # Suppress DEPRECATION WARNING
+    networks_cli_compatible: yes
+  loop:
+    - { cont_name: 'webapp_nginx', ip_addr: '10.0.0.2' }
+    - { cont_name: 'webapp_flask', ip_addr: '10.0.0.3' }
+    - { cont_name: 'webapp_postgres', ip_addr: '10.0.0.4' }

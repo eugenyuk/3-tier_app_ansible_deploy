@@ -1,5 +1,13 @@
 version: '3'
 
 services:
-  ubuntu_server:
+  nginx:
     build: .
+    image: ubuntu-sshd:18.04
+    container_name: webapp-nginx
+  flask:
+    image: ubuntu-sshd:18.04
+    container_name: webapp-flask
+  postgres:
+    image: ubuntu-sshd:18.04
+    container_name: webapp-postgres

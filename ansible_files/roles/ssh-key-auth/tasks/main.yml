@@ -1,0 +1,44 @@
+---
+# tasks file for setup-passwordless-ssh-transport
+- name: install prerequisites
+  apt: 
+    name: aptitude 
+    update_cache: yes 
+    state: latest 
+    force_apt_get: yes
+
+# Install Packages
+- name: install required system packages
+  apt:
+    name: sudo
+    state: latest
+
+# Sudo group setup
+- name: make sure we have a 'wheel' group
+  group:
+    name: wheel
+    state: present
+
+- name: allow 'wheel' group to have passwordless sudo
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
+
+# User + Key Setup
+- name: create a new regular user with sudo privileges
+  user:
+    name: "{{ create_user }}"
+    state: present
+    groups: wheel
+    append: true
+    create_home: true
+    shell: /bin/bash
+
+- name: set authorized key for remote user
+  authorized_key:
+    user: "{{ create_user }}"
+    state: present
+    key: "{{ copy_local_key }}"

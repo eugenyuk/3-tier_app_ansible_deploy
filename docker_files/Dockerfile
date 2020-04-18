@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y python openssh-server
 # To set up SSHd service in a container
 RUN mkdir /var/run/sshd
 RUN echo 'root:secret' | chpasswd
-RUN sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH login fix. Otherwise user is kicked off after login
 RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd

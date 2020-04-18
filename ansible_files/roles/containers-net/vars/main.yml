@@ -1,0 +1,3 @@
+---
+# vars file for net-setup
+net_name: net-10.0.0.0_16

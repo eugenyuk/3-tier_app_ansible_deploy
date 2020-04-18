@@ -1,8 +1,11 @@
 ---
-- hosts: localhost
-  #connection: local
+- name: setup a net of containers
+  hosts: localhost
   roles:
-    - container-net-setup
-    - nginx
-    - flask
-    - postgres
+    - containers-net
+
+- name: setup ssh key authentication
+  hosts: ansible_hosts
+  remote_user: root
+  roles:
+    - ssh-key-auth
