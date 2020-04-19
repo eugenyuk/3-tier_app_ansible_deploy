@@ -17,6 +17,6 @@
     # Suppress DEPRECATION WARNING
     networks_cli_compatible: yes
   loop:
-    - { cont_name: 'webapp_nginx', ip_addr: '10.0.0.2' }
-    - { cont_name: 'webapp_flask', ip_addr: '10.0.0.3' }
-    - { cont_name: 'webapp_postgres', ip_addr: '10.0.0.4' }
+    - { cont_name: 'webapp-nginx', ip_addr: '10.0.0.2' }
+    - { cont_name: 'webapp-flask', ip_addr: '10.0.0.3' }
+    - { cont_name: 'webapp-postgres', ip_addr: '10.0.0.4' }

@@ -13,7 +13,7 @@
     name: sudo
     state: latest
 
-# Sudo group setup
+# 'wheel' group setup
 - name: make sure we have a 'wheel' group
   group:
     name: wheel
